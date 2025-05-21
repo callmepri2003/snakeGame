@@ -11,7 +11,7 @@ import snakegame.Snake.SnakeStates.Up;
 public class Head extends SnakePart {
 
   public Head(Class<? extends Direction> direction) {
-    super(direction, 100, 100);
+    super(direction, 10, 10);
   }
 
   public void goLeft() {

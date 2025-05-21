@@ -22,6 +22,8 @@ public abstract class SnakePart implements GameEntity {
     this.right = new Right(this);
     this.up = new Up(this);
     this.down = new Down(this);
+    this.xCord = xCord;
+    this.yCord = yCord;
     setDirection(direction);
   }
 

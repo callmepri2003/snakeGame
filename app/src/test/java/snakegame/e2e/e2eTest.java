@@ -1,23 +1,134 @@
 package snakegame.e2e;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import snakegame.Controller;
+import snakegame.DTO.GameState;
+import snakegame.Snake.SnakeParts.Head;
 
 public class e2eTest {
-  private Controller controller = new Controller();
+  private Controller controller;
+  GameState gameState;
+  Head head;
 
-  // Snake should spawn in the middle of the board
+  @BeforeEach
+  public void setUp() {
+    controller = new Controller();
+  }
 
-  // Should go left
+  @Test
+  public void testSnakeSpawnsInMiddle() {
+    // Snake should spawn in the middle of the board
+    GameState gameState = controller.getGameState();
+    Head head = gameState.getHead();
 
-  // tick 10 times
+    assertEquals(10, head.getxCord());
+    assertEquals(10, head.getxCord());
 
-  // Should end up 10 blocks to the left
+  }
 
-  // goUp function
+  @Test
+  public void testMovementDown() {
 
-  // Direction of snake should be up
+    // Go down
+    controller.goDown();
 
-  // tick 10 times
+    // tick 10 times
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
 
-  // should end up in a tile 10 blocks up
+    gameState = controller.getGameState();
+    head = gameState.getHead();
+
+    // Should end up 10 blocks to the left
+    assertEquals(10, head.getxCord());
+    assertEquals(0, head.getyCord());
+  }
+
+  @Test
+  public void testMovementUp() {
+
+    // Go down
+    controller.goUp();
+
+    // tick 10 times
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+
+    gameState = controller.getGameState();
+    head = gameState.getHead();
+
+    // Should end up 10 blocks to the left
+    assertEquals(10, head.getxCord());
+    assertEquals(20, head.getyCord());
+  }
+
+  @Test
+  public void testMovementLeft() {
+
+    // Go Left
+    controller.goUp();
+    controller.goLeft();
+
+    // tick 10 times
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+
+    gameState = controller.getGameState();
+    head = gameState.getHead();
+
+    // Should end up 10 blocks to the left
+    assertEquals(0, head.getxCord());
+    assertEquals(10, head.getyCord());
+  }
+
+  @Test
+  public void testMovementRight() {
+
+    // tick 10 times
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+    controller.tick();
+
+    gameState = controller.getGameState();
+    head = gameState.getHead();
+
+    // Should end up 10 blocks to the left
+    assertEquals(20, head.getxCord());
+    assertEquals(10, head.getyCord());
+  }
 }

@@ -36,7 +36,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        for (GameEntity object : controller.getAllObjects()) {
+        for (GameEntity object : controller.getGameState().getAllEntities()) {
             object.paint(g, HEIGHT, WIDTH, TILESIZE);
         }
     }

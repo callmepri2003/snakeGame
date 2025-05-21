@@ -1,22 +1,18 @@
 package snakegame;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import snakegame.DTO.DTO;
-import snakegame.DTO.GameEntity;
+import snakegame.DTO.GameState;
 import snakegame.Snake.SnakeParts.Head;
-import snakegame.Snake.SnakeStates.Left;
 import snakegame.Snake.SnakeStates.Right;
 
 public class Controller {
 
   private Head head;
-  private List<GameEntity> gameEntities = new ArrayList<>();
+  private GameState gameState;
 
   public Controller() {
     head = new Head(Right.class);
-    gameEntities.add(head);
+    gameState = new GameState();
+    gameState.addEntity(head);
   }
 
   public void goLeft() {
@@ -43,8 +39,8 @@ public class Controller {
   private void handleCollisions() {
   }
 
-  public List<GameEntity> getAllObjects() {
-    return gameEntities;
+  public GameState getGameState() {
+    return gameState;
   }
 
 }
