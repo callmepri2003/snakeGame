@@ -1,25 +1,50 @@
 package snakegame;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import snakegame.DTO.DTO;
+import snakegame.DTO.GameEntity;
+import snakegame.Snake.SnakeParts.Head;
+import snakegame.Snake.SnakeStates.Left;
+import snakegame.Snake.SnakeStates.Right;
+
 public class Controller {
 
+  private Head head;
+  private List<GameEntity> gameEntities = new ArrayList<>();
+
+  public Controller() {
+    head = new Head(Right.class);
+    gameEntities.add(head);
+  }
+
   public void goLeft() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'goLeft'");
+    head.goLeft();
   }
 
   public void goRight() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'goRight'");
+    head.goRight();
   }
 
   public void goUp() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'goUp'");
+    head.goUp();
   }
 
   public void goDown() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'goDown'");
+    head.goDown();
+  }
+
+  public void tick() {
+    head.advance();
+    handleCollisions();
+  }
+
+  private void handleCollisions() {
+  }
+
+  public List<GameEntity> getAllObjects() {
+    return gameEntities;
   }
 
 }

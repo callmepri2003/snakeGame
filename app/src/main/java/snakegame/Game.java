@@ -1,21 +1,34 @@
 package snakegame;
 
 import javax.swing.*;
+
+import snakegame.DTO.DTO;
+import snakegame.DTO.GameEntity;
+import snakegame.Snake.SnakeStates.Direction;
+import snakegame.Snake.SnakeStates.Down;
+import snakegame.Snake.SnakeStates.Up;
+
 import java.awt.*;
 import java.awt.event.*;
 
 public class Game extends JPanel implements KeyListener, ActionListener {
-
+    private final int HEIGHT = 12;
+    private final int WIDTH = 20;
     private Timer timer;
     private Controller controller;
+    private final int TILESIZE = 50;
 
     public Game() {
-        setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(WIDTH * TILESIZE, HEIGHT * TILESIZE));
         setBackground(Color.BLACK);
         setFocusable(true);
         addKeyListener(this);
+        controller = new Controller();
 
-        timer = new Timer(16, this);
+        timer = new Timer(200, e -> {
+            controller.tick();
+            repaint();
+        });
         timer.start();
     }
 
@@ -23,8 +36,9 @@ public class Game extends JPanel implements KeyListener, ActionListener {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.setColor(Color.RED);
-        g.fillRect(100, 100, 50, 50);
+        for (GameEntity object : controller.getAllObjects()) {
+            object.paint(g, HEIGHT, WIDTH, TILESIZE);
+        }
     }
 
     @Override
@@ -49,14 +63,6 @@ public class Game extends JPanel implements KeyListener, ActionListener {
             controller.goDown();
     }
 
-    @Override
-    public void keyReleased(KeyEvent e) {
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-    }
-
     public static void main(String[] args) {
         JFrame frame = new JFrame("Snake Game");
         Game gamePanel = new Game();
@@ -67,5 +73,13 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
     }
 }
