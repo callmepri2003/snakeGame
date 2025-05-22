@@ -92,8 +92,8 @@ public class Controller {
 
   public void spawnApple() {
     Apple apple = new Apple(
-        (int) Math.round(Math.random() * (WIDTH - 1)),
-        (int) Math.round(Math.random() * (HEIGHT - 1)));
+        (int) Math.round(Math.random() * (WIDTH - 2) + 1),
+        (int) Math.round(Math.random() * (HEIGHT - 2) + 1));
     gameState.addEntity(apple);
   }
 
