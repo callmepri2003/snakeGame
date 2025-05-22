@@ -17,7 +17,13 @@ public class Body extends SnakePart {
 
   @Override
   public void paint(Graphics g, int HEIGHT, int WIDTH, int TILESIZE) {
-    BufferedImage img = getDirection().getImg(getPrevDirection(), Body.class);
+    BufferedImage img;
+    if (getSuccessor() != null) {
+      img = getDirection().getImg(getPrevDirection(), Body.class);
+    } else {
+      img = getDirection().getImg(getPrevDirection(), Tail.class);
+
+    }
     g.drawImage(img, getxCord() * TILESIZE, (HEIGHT - getyCord() - 1) * TILESIZE, TILESIZE, TILESIZE, null);
     if (getSuccessor() != null) {
       getSuccessor().paint(g, HEIGHT, WIDTH, TILESIZE);

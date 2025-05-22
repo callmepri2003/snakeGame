@@ -6,6 +6,7 @@ import snakegame.Assets;
 import snakegame.Snake.SnakeParts.Body;
 import snakegame.Snake.SnakeParts.Head;
 import snakegame.Snake.SnakeParts.SnakePart;
+import snakegame.Snake.SnakeParts.Tail;
 
 public class Right implements Direction {
   private SnakePart snakePart;
@@ -43,6 +44,8 @@ public class Right implements Direction {
       return getHeadImg(prevDirection);
     } else if (partClass.equals(Body.class)) {
       return getBodyImg(prevDirection);
+    } else if (partClass.equals(Tail.class)) {
+      return getTailImg();
     }
     return null;
   }
@@ -63,6 +66,10 @@ public class Right implements Direction {
 
   private BufferedImage getHeadImg(Direction prevDirection) {
     return Assets.head_right;
+  }
+
+  private BufferedImage getTailImg() {
+    return Assets.tail_left;
   }
 
 }

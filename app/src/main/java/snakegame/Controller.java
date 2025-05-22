@@ -39,7 +39,7 @@ public class Controller {
     this.WIDTH = WIDTH;
     this.HEIGHT = HEIGHT;
     this.TILESIZE = TILESIZE;
-
+    head.grow();
     lineWalls();
   }
 
