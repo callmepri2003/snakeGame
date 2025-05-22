@@ -42,6 +42,9 @@ public class Head extends SnakePart {
       g.fillOval(getxCord() * TILESIZE + 4, (HEIGHT - getyCord()) * TILESIZE + 4, 4, 4);
       g.fillOval(getxCord() * TILESIZE + 4, (HEIGHT - getyCord()) * TILESIZE + 12, 4, 4);
     }
+    if (getSuccessor() != null) {
+      getSuccessor().paint(g, HEIGHT, WIDTH, TILESIZE);
+    }
   }
 
 }
