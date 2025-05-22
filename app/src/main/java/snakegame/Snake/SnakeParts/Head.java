@@ -2,6 +2,7 @@ package snakegame.Snake.SnakeParts;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import snakegame.Snake.SnakeStates.Direction;
 import snakegame.Snake.SnakeStates.Down;
@@ -32,16 +33,9 @@ public class Head extends SnakePart {
   @Override
   public void paint(Graphics g, int HEIGHT, int WIDTH, int TILESIZE) {
     g.setColor(Color.GREEN);
-    g.fillRect(getxCord() * TILESIZE, (HEIGHT - getyCord() - 1) * TILESIZE, TILESIZE, TILESIZE);
-    g.setColor(Color.BLACK);
-    // Draw eyes based on direction
-    if (getDirection() instanceof Up || getDirection() instanceof Down) {
-      g.fillOval(getxCord() * TILESIZE + 4, (HEIGHT - getyCord() - 1) * TILESIZE + 4, 4, 4);
-      g.fillOval(getxCord() * TILESIZE + 12, (HEIGHT - getyCord() - 1) * TILESIZE + 4, 4, 4);
-    } else {
-      g.fillOval(getxCord() * TILESIZE + 4, (HEIGHT - getyCord() - 1) * TILESIZE + 4, 4, 4);
-      g.fillOval(getxCord() * TILESIZE + 4, (HEIGHT - getyCord() - 1) * TILESIZE + 12, 4, 4);
-    }
+    BufferedImage img = getDirection().getImg(getPrevDirection(), Head.class);
+    g.drawImage(img, getxCord() * TILESIZE, (HEIGHT - getyCord() - 1) * TILESIZE, TILESIZE, TILESIZE, null);
+
     if (getSuccessor() != null) {
       getSuccessor().paint(g, HEIGHT, WIDTH, TILESIZE);
     }

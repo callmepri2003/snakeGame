@@ -4,10 +4,11 @@ import javax.swing.*;
 import snakegame.DTO.GameEntity;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.TileObserver;
 
 public class Game extends JPanel implements KeyListener, ActionListener {
     private final int HEIGHT = 20;
-    private final int WIDTH = 43;
+    private final int WIDTH = 32;
     private final int TILESIZE = 40;
 
     private Timer timer;
@@ -20,6 +21,8 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         setFocusable(true);
         setLayout(null); // Use absolute layout to position button
         addKeyListener(this);
+
+        Assets.initialiseAssets();
 
         controller = new Controller(WIDTH, HEIGHT, TILESIZE);
 
@@ -49,6 +52,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        g.drawImage(Assets.background, 0, 0, WIDTH * TILESIZE, HEIGHT * TILESIZE, null);
 
         for (GameEntity object : controller.getGameState().getAllEntities()) {
             object.paint(g, HEIGHT, WIDTH, TILESIZE);

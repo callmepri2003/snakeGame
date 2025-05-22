@@ -17,6 +17,7 @@ public abstract class SnakePart implements GameEntity {
 
   private int xCord;
   private int yCord;
+  private Direction prevDirection;
 
   public SnakePart(Class<? extends Direction> direction, int xCord, int yCord) {
     this.left = new Left(this);
@@ -25,6 +26,7 @@ public abstract class SnakePart implements GameEntity {
     this.down = new Down(this);
     this.xCord = xCord;
     this.yCord = yCord;
+    this.prevDirection = null;
     setDirection(direction);
   }
 
@@ -58,6 +60,7 @@ public abstract class SnakePart implements GameEntity {
   }
 
   public void setDirection(Class<? extends Direction> direction) {
+    prevDirection = getDirection();
     if (direction == Left.class) {
       state = left;
     } else if (direction == Right.class) {
@@ -83,5 +86,13 @@ public abstract class SnakePart implements GameEntity {
 
   public void setSuccessor(Body successor) {
     this.successor = successor;
+  }
+
+  public Direction getPrevDirection() {
+    return prevDirection;
+  }
+
+  public void setPrevDirection(Direction prevDirection) {
+    this.prevDirection = prevDirection;
   }
 }
