@@ -1,4 +1,4 @@
-package snakegame.e2e;
+package snakegame.blackbox;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -9,14 +9,17 @@ import snakegame.Controller;
 import snakegame.DTO.GameState;
 import snakegame.Snake.SnakeParts.Head;
 
-public class e2eTest {
+public class blackboxTests {
   private Controller controller;
   GameState gameState;
   Head head;
+  private final int HEIGHT = 12;
+  private final int WIDTH = 20;
+  private final int TILESIZE = 50;
 
   @BeforeEach
   public void setUp() {
-    controller = new Controller();
+    controller = new Controller(WIDTH, HEIGHT, TILESIZE);
   }
 
   @Test

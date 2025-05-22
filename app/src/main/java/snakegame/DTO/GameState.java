@@ -3,6 +3,7 @@ package snakegame.DTO;
 import java.util.ArrayList;
 import java.util.List;
 
+import snakegame.Items.Apple;
 import snakegame.Snake.SnakeParts.Head;
 
 public class GameState {
@@ -27,6 +28,19 @@ public class GameState {
       }
     }
     return null;
+  }
+
+  public Apple getApple() {
+    for (GameEntity entity : gameEntities) {
+      if (entity instanceof Apple apple) {
+        return apple;
+      }
+    }
+    return null;
+  }
+
+  public void removeEntity(GameEntity entity) {
+    gameEntities.remove(entity);
   }
 
 }

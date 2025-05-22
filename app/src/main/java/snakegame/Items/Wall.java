@@ -7,6 +7,11 @@ import snakegame.DTO.GameEntity;
 public class Wall implements Collidable, GameEntity {
   private int xCord, yCord;
 
+  public Wall(int xCord, int yCord) {
+    this.xCord = xCord;
+    this.yCord = yCord;
+  }
+
   @Override
   public void collide() {
     // TODO Auto-generated method stub
@@ -32,7 +37,7 @@ public class Wall implements Collidable, GameEntity {
   @Override
   public void paint(Graphics g, int HEIGHT, int WIDTH, int TILESIZE) {
     g.setColor(Color.DARK_GRAY);
-    g.fillRect(getxCord() * WIDTH, getyCord() * HEIGHT, TILESIZE, TILESIZE);
+    g.fillRect(getxCord() * TILESIZE, (HEIGHT - getyCord()) * TILESIZE, TILESIZE, TILESIZE);
   }
 
 }

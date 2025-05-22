@@ -1,6 +1,10 @@
 package snakegame;
 
+import snakegame.DTO.GameEntity;
 import snakegame.DTO.GameState;
+import snakegame.Items.Apple;
+import snakegame.Items.Collidable;
+import snakegame.Items.Wall;
 import snakegame.Snake.SnakeParts.Head;
 import snakegame.Snake.SnakeStates.Right;
 
@@ -9,10 +13,32 @@ public class Controller {
   private Head head;
   private GameState gameState;
 
-  public Controller() {
+  private int HEIGHT, WIDTH;
+  private int TILESIZE;
+
+  public Controller(int WIDTH, int HEIGHT, int TILESIZE) {
+    commonInit(WIDTH, HEIGHT, TILESIZE);
+    spawnApple();
+
+  }
+
+  public Controller(int wIDTH2, int hEIGHT2, int tILESIZE2, boolean spawnApple) {
+    commonInit(wIDTH2, hEIGHT2, tILESIZE2);
+    if (spawnApple) {
+      spawnApple();
+    }
+
+  }
+
+  private void commonInit(int WIDTH, int HEIGHT, int TILESIZE) {
     head = new Head(Right.class);
     gameState = new GameState();
     gameState.addEntity(head);
+    this.WIDTH = WIDTH;
+    this.HEIGHT = HEIGHT;
+    this.TILESIZE = TILESIZE;
+
+    lineWalls();
   }
 
   public void goLeft() {
@@ -37,10 +63,50 @@ public class Controller {
   }
 
   private void handleCollisions() {
+    boolean respawnApple = false;
+    for (GameEntity entity : getGameState().getAllEntities()) {
+      if (entity.getxCord() == head.getxCord() &&
+          entity.getyCord() == head.getyCord() &&
+          entity != head) {
+        if (entity instanceof Apple apple) {
+          respawnApple = true;
+        }
+      }
+    }
+
+    if (respawnApple) {
+      getGameState().removeEntity(getGameState().getApple());
+      spawnApple();
+    }
   }
 
   public GameState getGameState() {
     return gameState;
+  }
+
+  public void spawnApple() {
+    Apple apple = new Apple(
+        (int) Math.round(Math.random() * (WIDTH - 1)),
+        (int) Math.round(Math.random() * (HEIGHT - 1)));
+    gameState.addEntity(apple);
+  }
+
+  public void spawnApple(int x, int y) {
+    Apple apple = new Apple(x, y);
+    gameState.addEntity(apple);
+  }
+
+  private void lineWalls() {
+    for (int i = 0; i < WIDTH; i++) {
+      gameState.addEntity(new Wall(i, HEIGHT));
+    }
+    for (int currHeight = 1; currHeight < HEIGHT - 1; currHeight++) {
+      gameState.addEntity(new Wall(0, currHeight + 1));
+      gameState.addEntity(new Wall(WIDTH - 1, currHeight + 1));
+    }
+    for (int i = 0; i < WIDTH; i++) {
+      gameState.addEntity(new Wall(i, 0 + 1));
+    }
   }
 
 }

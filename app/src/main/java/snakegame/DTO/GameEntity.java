@@ -5,4 +5,8 @@ import java.awt.Graphics;
 public interface GameEntity {
   public void paint(Graphics g, int hEIGHT, int WIDTH, int TILESIZE);
 
+  public int getxCord();
+
+  public int getyCord();
+
 }

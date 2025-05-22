@@ -2,11 +2,7 @@ package snakegame;
 
 import javax.swing.*;
 
-import snakegame.DTO.DTO;
 import snakegame.DTO.GameEntity;
-import snakegame.Snake.SnakeStates.Direction;
-import snakegame.Snake.SnakeStates.Down;
-import snakegame.Snake.SnakeStates.Up;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -23,7 +19,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         setBackground(Color.BLACK);
         setFocusable(true);
         addKeyListener(this);
-        controller = new Controller();
+        controller = new Controller(WIDTH, HEIGHT, TILESIZE);
 
         timer = new Timer(200, e -> {
             controller.tick();
