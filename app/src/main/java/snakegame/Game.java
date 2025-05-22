@@ -6,9 +6,9 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Game extends JPanel implements KeyListener, ActionListener {
-    private final int HEIGHT = 27;
+    private final int HEIGHT = 20;
     private final int WIDTH = 43;
-    private final int TILESIZE = 30;
+    private final int TILESIZE = 40;
 
     private Timer timer;
     private Controller controller;
@@ -91,7 +91,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Snake Game");
+        JFrame frame = new JFrame("Feed the Snake");
         Game gamePanel = new Game();
 
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
