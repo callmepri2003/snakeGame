@@ -16,6 +16,8 @@ public class Controller {
   private int HEIGHT, WIDTH;
   private int TILESIZE;
 
+  private boolean gameOn = true;
+
   public Controller(int WIDTH, int HEIGHT, int TILESIZE) {
     commonInit(WIDTH, HEIGHT, TILESIZE);
     spawnApple();
@@ -70,6 +72,10 @@ public class Controller {
           entity != head) {
         if (entity instanceof Apple apple) {
           respawnApple = true;
+          head.grow();
+        }
+        if (entity instanceof Wall wall) {
+          gameOn = false;
         }
       }
     }
@@ -107,6 +113,10 @@ public class Controller {
     for (int i = 0; i < WIDTH; i++) {
       gameState.addEntity(new Wall(i, 0 + 1));
     }
+  }
+
+  public boolean gameOn() {
+    return gameOn;
   }
 
 }

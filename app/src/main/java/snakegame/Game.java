@@ -1,31 +1,49 @@
 package snakegame;
 
 import javax.swing.*;
-
 import snakegame.DTO.GameEntity;
-
 import java.awt.*;
 import java.awt.event.*;
 
 public class Game extends JPanel implements KeyListener, ActionListener {
-    private final int HEIGHT = 12;
-    private final int WIDTH = 20;
+    private final int HEIGHT = 27;
+    private final int WIDTH = 43;
+    private final int TILESIZE = 30;
+
     private Timer timer;
     private Controller controller;
-    private final int TILESIZE = 50;
+    private JButton restartButton;
 
     public Game() {
         setPreferredSize(new Dimension(WIDTH * TILESIZE, HEIGHT * TILESIZE));
         setBackground(Color.BLACK);
         setFocusable(true);
+        setLayout(null); // Use absolute layout to position button
         addKeyListener(this);
+
         controller = new Controller(WIDTH, HEIGHT, TILESIZE);
 
-        timer = new Timer(200, e -> {
-            controller.tick();
-            repaint();
+        // Create and configure restart button
+        restartButton = new JButton("Restart");
+        restartButton.setBounds((WIDTH * TILESIZE) / 2 - 75, (HEIGHT * TILESIZE) / 2 + 40, 150, 40);
+        restartButton.setVisible(false);
+        restartButton.addActionListener(e -> restartGame());
+        this.add(restartButton);
+
+        // Timer loop
+        timer = new Timer(32, e -> {
+            if (controller.gameOn()) {
+                controller.tick();
+            }
+            repaint(); // Always repaint to show game or end screen
         });
         timer.start();
+    }
+
+    private void restartGame() {
+        controller = new Controller(WIDTH, HEIGHT, TILESIZE); // Re-initialize game
+        restartButton.setVisible(false);
+        requestFocusInWindow(); // Regain key focus
     }
 
     @Override
@@ -35,6 +53,22 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         for (GameEntity object : controller.getGameState().getAllEntities()) {
             object.paint(g, HEIGHT, WIDTH, TILESIZE);
         }
+
+        if (!controller.gameOn()) {
+            // Dim background
+            g.setColor(new Color(0, 0, 0, 150));
+            g.fillRect(0, 0, WIDTH * TILESIZE, HEIGHT * TILESIZE);
+
+            // Game Over message
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Arial", Font.BOLD, 48));
+            String msg = "Game Over";
+            int textWidth = g.getFontMetrics().stringWidth(msg);
+            g.drawString(msg, (WIDTH * TILESIZE - textWidth) / 2, (HEIGHT * TILESIZE) / 2);
+
+            // Show restart button
+            restartButton.setVisible(true);
+        }
     }
 
     @Override
@@ -42,15 +76,12 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         repaint();
     }
 
-    // Key handling
     @Override
     public void keyPressed(KeyEvent e) {
         int key = e.getKeyCode();
 
-        // Move square
-        if (key == KeyEvent.VK_LEFT) {
+        if (key == KeyEvent.VK_LEFT)
             controller.goLeft();
-        }
         if (key == KeyEvent.VK_RIGHT)
             controller.goRight();
         if (key == KeyEvent.VK_UP)
