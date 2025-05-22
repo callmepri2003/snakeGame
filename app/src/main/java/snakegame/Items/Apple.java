@@ -7,8 +7,14 @@ import snakegame.DTO.GameEntity;
 public class Apple implements Collidable, GameEntity {
   private int xCord, yCord;
 
+  public Apple(int x, int y) {
+    this.xCord = x;
+    this.yCord = y;
+  }
+
   @Override
   public void collide() {
+
   }
 
   public void setxCord(int xCord) {
@@ -30,7 +36,7 @@ public class Apple implements Collidable, GameEntity {
   @Override
   public void paint(Graphics g, int HEIGHT, int WIDTH, int TILESIZE) {
     g.setColor(Color.RED);
-    g.fillOval(getxCord() * WIDTH, getyCord() * HEIGHT, TILESIZE, TILESIZE);
+    g.fillOval(getxCord() * TILESIZE, (HEIGHT - getyCord()) * TILESIZE, TILESIZE, TILESIZE);
   }
 
 }

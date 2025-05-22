@@ -14,7 +14,7 @@ public class Body extends SnakePart {
   @Override
   public void paint(Graphics g, int HEIGHT, int WIDTH, int TILESIZE) {
     g.setColor(Color.GREEN.darker());
-    g.fillRect(getxCord() * WIDTH, getyCord() * HEIGHT, TILESIZE, TILESIZE);
+    g.fillRect(getxCord() * TILESIZE, getyCord() * TILESIZE, TILESIZE, TILESIZE);
   }
 
 }
