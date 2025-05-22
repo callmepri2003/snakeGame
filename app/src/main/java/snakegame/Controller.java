@@ -39,7 +39,7 @@ public class Controller {
     this.WIDTH = WIDTH;
     this.HEIGHT = HEIGHT;
     this.TILESIZE = TILESIZE;
-
+    head.grow();
     lineWalls();
   }
 
@@ -92,8 +92,8 @@ public class Controller {
 
   public void spawnApple() {
     Apple apple = new Apple(
-        (int) Math.round(Math.random() * (WIDTH - 2) + 1),
-        (int) Math.round(Math.random() * (HEIGHT - 2) + 1));
+        (int) (Math.random() * (WIDTH - 2)) + 1,
+        (int) (Math.random() * (HEIGHT - 2)) + 1);
     gameState.addEntity(apple);
   }
 
@@ -104,14 +104,14 @@ public class Controller {
 
   private void lineWalls() {
     for (int i = 0; i < WIDTH; i++) {
-      gameState.addEntity(new Wall(i, HEIGHT));
+      gameState.addEntity(new Wall(i, HEIGHT - 1));
     }
     for (int currHeight = 1; currHeight < HEIGHT - 1; currHeight++) {
-      gameState.addEntity(new Wall(0, currHeight + 1));
-      gameState.addEntity(new Wall(WIDTH - 1, currHeight + 1));
+      gameState.addEntity(new Wall(0, currHeight));
+      gameState.addEntity(new Wall(WIDTH - 1, currHeight));
     }
     for (int i = 0; i < WIDTH; i++) {
-      gameState.addEntity(new Wall(i, 0 + 1));
+      gameState.addEntity(new Wall(i, 0));
     }
   }
 

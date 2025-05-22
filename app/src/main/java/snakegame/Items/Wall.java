@@ -2,6 +2,9 @@ package snakegame.Items;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+import snakegame.Assets;
 import snakegame.DTO.GameEntity;
 
 public class Wall implements Collidable, GameEntity {
@@ -37,7 +40,8 @@ public class Wall implements Collidable, GameEntity {
   @Override
   public void paint(Graphics g, int HEIGHT, int WIDTH, int TILESIZE) {
     g.setColor(Color.DARK_GRAY);
-    g.fillRect(getxCord() * TILESIZE, (HEIGHT - getyCord()) * TILESIZE, TILESIZE, TILESIZE);
+    BufferedImage image = Assets.wall;
+    g.drawImage(image, getxCord() * TILESIZE, (HEIGHT - getyCord() - 1) * TILESIZE, TILESIZE, TILESIZE, null);
   }
 
 }

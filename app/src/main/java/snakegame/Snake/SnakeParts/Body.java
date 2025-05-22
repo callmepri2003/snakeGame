@@ -2,6 +2,7 @@ package snakegame.Snake.SnakeParts;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import snakegame.Snake.SnakeStates.Direction;
 
@@ -16,8 +17,14 @@ public class Body extends SnakePart {
 
   @Override
   public void paint(Graphics g, int HEIGHT, int WIDTH, int TILESIZE) {
-    g.setColor(Color.GREEN.darker());
-    g.fillRect(getxCord() * TILESIZE, (HEIGHT - getyCord()) * TILESIZE, TILESIZE, TILESIZE);
+    BufferedImage img;
+    if (getSuccessor() != null) {
+      img = getDirection().getImg(getPrevDirection(), Body.class);
+    } else {
+      img = getDirection().getImg(getPrevDirection(), Tail.class);
+
+    }
+    g.drawImage(img, getxCord() * TILESIZE, (HEIGHT - getyCord() - 1) * TILESIZE, TILESIZE, TILESIZE, null);
     if (getSuccessor() != null) {
       getSuccessor().paint(g, HEIGHT, WIDTH, TILESIZE);
     }
