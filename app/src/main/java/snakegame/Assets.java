@@ -26,7 +26,7 @@ public class Assets {
 
   public static void initialiseAssets() {
     try {
-      apple = ImageIO.read(Assets.class.getResource("/images/apple.png"));
+      apple = ImageIO.read(Assets.class.getResource("/images/subject.png"));
       body_bottomleft = ImageIO.read(Assets.class.getResource("/images/body_bottomleft.png"));
       body_bottomright = ImageIO.read(Assets.class.getResource("/images/body_bottomright.png"));
       body_horizontal = ImageIO.read(Assets.class.getResource("/images/body_horizontal.png"));

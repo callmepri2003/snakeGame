@@ -2,6 +2,7 @@ package snakegame;
 
 import snakegame.DTO.GameEntity;
 import snakegame.DTO.GameState;
+import snakegame.GameScreen.GameScreen;
 import snakegame.Items.Apple;
 import snakegame.Items.Collidable;
 import snakegame.Items.Wall;
