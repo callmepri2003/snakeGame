@@ -5,6 +5,7 @@ import java.util.List;
 
 import snakegame.Items.Apple;
 import snakegame.Snake.SnakeParts.Head;
+import snakegame.Snake.SnakeParts.SnakePart;
 
 public class GameState {
   private List<GameEntity> gameEntities = new ArrayList<>();
@@ -18,7 +19,23 @@ public class GameState {
   }
 
   public List<GameEntity> getAllEntities() {
-    return gameEntities;
+    List<GameEntity> allEntities = new ArrayList<>();
+
+    for (GameEntity entity : gameEntities) {
+      if (!(entity instanceof Head)) {
+        allEntities.add(entity);
+      }
+    }
+
+    Head head = getHead();
+    SnakePart current = head;
+
+    while (current != null) {
+      allEntities.add(current);
+      current = current.getSuccessor();
+    }
+
+    return allEntities;
   }
 
   public Head getHead() {

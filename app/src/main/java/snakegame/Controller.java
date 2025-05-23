@@ -2,9 +2,11 @@ package snakegame;
 
 import snakegame.DTO.GameEntity;
 import snakegame.DTO.GameState;
+import snakegame.GameScreen.GameScreen;
 import snakegame.Items.Apple;
 import snakegame.Items.Collidable;
 import snakegame.Items.Wall;
+import snakegame.Snake.SnakeParts.Body;
 import snakegame.Snake.SnakeParts.Head;
 import snakegame.Snake.SnakeStates.Right;
 
@@ -77,6 +79,9 @@ public class Controller {
         if (entity instanceof Wall wall) {
           gameOn = false;
         }
+        if (entity instanceof Body body) {
+          gameOn = false;
+        }
       }
     }
 
@@ -90,7 +95,7 @@ public class Controller {
     return gameState;
   }
 
-  public void spawnApple() {
+  private void spawnApple() {
     Apple apple = new Apple(
         (int) (Math.random() * (WIDTH - 2)) + 1,
         (int) (Math.random() * (HEIGHT - 2)) + 1);
@@ -104,14 +109,14 @@ public class Controller {
 
   private void lineWalls() {
     for (int i = 0; i < WIDTH; i++) {
-      gameState.addEntity(new Wall(i, HEIGHT - 1));
+      gameState.addEntity(new Wall(i, HEIGHT));
     }
     for (int currHeight = 1; currHeight < HEIGHT - 1; currHeight++) {
-      gameState.addEntity(new Wall(0, currHeight));
-      gameState.addEntity(new Wall(WIDTH - 1, currHeight));
+      gameState.addEntity(new Wall(-1, currHeight));
+      gameState.addEntity(new Wall(WIDTH, currHeight));
     }
     for (int i = 0; i < WIDTH; i++) {
-      gameState.addEntity(new Wall(i, 0));
+      gameState.addEntity(new Wall(i, -1));
     }
   }
 

@@ -1,13 +1,14 @@
 package snakegame.Snake.SnakeParts;
 
 import snakegame.DTO.GameEntity;
+import snakegame.Items.Collidable;
 import snakegame.Snake.SnakeStates.Direction;
 import snakegame.Snake.SnakeStates.Down;
 import snakegame.Snake.SnakeStates.Left;
 import snakegame.Snake.SnakeStates.Right;
 import snakegame.Snake.SnakeStates.Up;
 
-public abstract class SnakePart implements GameEntity {
+public abstract class SnakePart implements GameEntity, Collidable {
   private Direction left;
   private Direction right;
   private Direction up;
@@ -70,6 +71,7 @@ public abstract class SnakePart implements GameEntity {
     } else if (direction == Down.class) {
       state = down;
     }
+
   }
 
   public void advance() {
@@ -77,6 +79,7 @@ public abstract class SnakePart implements GameEntity {
     if (successor != null) {
       successor.advance();
       successor.setDirection(getDirection().getClass());
+
     }
   }
 
@@ -92,7 +95,8 @@ public abstract class SnakePart implements GameEntity {
     return prevDirection;
   }
 
-  public void setPrevDirection(Direction prevDirection) {
-    this.prevDirection = prevDirection;
+  @Override
+  public void collide() {
+    return;
   }
 }

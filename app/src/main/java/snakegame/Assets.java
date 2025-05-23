@@ -26,7 +26,7 @@ public class Assets {
 
   public static void initialiseAssets() {
     try {
-      apple = ImageIO.read(Assets.class.getResource("/images/apple.png"));
+      apple = ImageIO.read(Assets.class.getResource("/images/subject.png"));
       body_bottomleft = ImageIO.read(Assets.class.getResource("/images/body_bottomleft.png"));
       body_bottomright = ImageIO.read(Assets.class.getResource("/images/body_bottomright.png"));
       body_horizontal = ImageIO.read(Assets.class.getResource("/images/body_horizontal.png"));
@@ -43,7 +43,7 @@ public class Assets {
       tail_left = ImageIO.read(Assets.class.getResource("/images/tail_left.png"));
       tail_right = ImageIO.read(Assets.class.getResource("/images/tail_right.png"));
       tail_up = ImageIO.read(Assets.class.getResource("/images/tail_up.png"));
-      background = ImageIO.read(Assets.class.getResource("/images/bg.jpg"));
+      background = ImageIO.read(Assets.class.getResource("/images/bg.png"));
       wall = ImageIO.read(Assets.class.getResource("/images/wall.png"));
     } catch (IOException e) {
       e.printStackTrace();
