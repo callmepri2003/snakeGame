@@ -7,9 +7,9 @@ import java.awt.event.*;
 import java.awt.image.TileObserver;
 
 public class Game extends JPanel implements KeyListener, ActionListener {
-    private final int HEIGHT = 20;
-    private final int WIDTH = 32;
-    private final int TILESIZE = 40;
+    private final int HEIGHT = 14;
+    private final int WIDTH = 21;
+    private final int TILESIZE = 60;
 
     private Timer timer;
     private Controller controller;
@@ -34,7 +34,7 @@ public class Game extends JPanel implements KeyListener, ActionListener {
         this.add(restartButton);
 
         // Timer loop
-        timer = new Timer(32, e -> {
+        timer = new Timer(50, e -> {
             if (controller.gameOn()) {
                 controller.tick();
             }
