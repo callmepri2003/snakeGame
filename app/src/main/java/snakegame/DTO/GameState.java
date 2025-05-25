@@ -9,6 +9,15 @@ import snakegame.Snake.SnakeParts.SnakePart;
 
 public class GameState {
   private List<GameEntity> gameEntities = new ArrayList<>();
+  private int score;
+
+  public int getScore() {
+    return score;
+  }
+
+  public void incrementScore() {
+    this.score++;
+  }
 
   public GameState() {
 

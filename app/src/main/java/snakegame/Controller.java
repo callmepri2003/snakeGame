@@ -75,6 +75,7 @@ public class Controller {
         if (entity instanceof Apple apple) {
           respawnApple = true;
           head.grow();
+          gameState.incrementScore();
         }
         if (entity instanceof Wall wall) {
           gameOn = false;
@@ -122,6 +123,10 @@ public class Controller {
 
   public boolean gameOn() {
     return gameOn;
+  }
+
+  public int getScore() {
+    return gameState.getScore();
   }
 
 }

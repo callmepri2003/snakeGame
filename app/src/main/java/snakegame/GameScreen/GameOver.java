@@ -13,6 +13,7 @@ public class GameOver implements GameScreen {
   private int TILESIZE;
   private Game game;
   private Controller newController = null;
+  private int score;
 
   // UI State
   private boolean restartButtonHovered = false;
@@ -35,7 +36,7 @@ public class GameOver implements GameScreen {
   private Rectangle menuButton;
   private Rectangle exitButton;
 
-  public GameOver(Game game, int width, int height, int tileSize) {
+  public GameOver(Game game, int width, int height, int tileSize, int score) {
     this.game = game;
     this.WIDTH = width;
     this.HEIGHT = height;
@@ -50,6 +51,8 @@ public class GameOver implements GameScreen {
     restartButton = new Rectangle(centerX, centerY + 60, buttonWidth, buttonHeight);
     menuButton = new Rectangle(centerX, centerY + 120, buttonWidth, buttonHeight);
     exitButton = new Rectangle(centerX, centerY + 180, buttonWidth, buttonHeight);
+    this.score = score;
+
   }
 
   @Override
@@ -142,7 +145,7 @@ public class GameOver implements GameScreen {
     g2d.setColor(LIGHT_GRAY);
 
     // Score display (placeholder - integrate with actual score)
-    String scoreText = "Final Score: 0";
+    String scoreText = "Final Score: " + score;
     FontMetrics fm = g2d.getFontMetrics();
     int scoreX = (WIDTH * TILESIZE - fm.stringWidth(scoreText)) / 2;
     int scoreY = (HEIGHT * TILESIZE) / 2 + 20;

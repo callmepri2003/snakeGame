@@ -33,7 +33,7 @@ public class GameBody implements GameScreen {
 
   private void checkGameOver(Controller controller2, Game game) {
     if (!controller2.gameOn()) {
-      game.setGameScreen(new GameOver(game, WIDTH, HEIGHT, TILESIZE));
+      game.setGameScreen(new GameOver(game, WIDTH, HEIGHT, TILESIZE, controller.getScore()));
     }
   }
 
